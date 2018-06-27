@@ -265,6 +265,7 @@ paket-files/
 *.sln.iml
 
 /node_modules
+/dist
 /npm-debug.log
 
 /test/assets/package-*/

@@ -1,29 +1,31 @@
-var webpack = require("webpack");
-var path = require("path");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-var DIST_DIR = path.resolve(__dirname, "dist");
-var SRC_DIR = path.resolve(__dirname, "src");
 
-var config = {
-    entry: SRC_DIR + "/app/index.js",
+const DIST_DIR = path.resolve(__dirname, "dist");
+const SRC_DIR = path.resolve(__dirname, "src");
+
+const config = {
+    entry: "./src/index.js",
     output: {
-        path: DIST_DIR + "/app",
-        filename: "bundle.js",
-        publicPath: "/app/"
+        path: path.join(__dirname, '/dist'),
+        filename: "bundle.js"
     },
     module: {
         rules: [
             {
-                test: /\.js?/,
-                include: SRC_DIR,
+                test: /\.js$/,
+                exclude: /node_models/,
                 use: {
-                    loader: "babel-loader",
-                    query: {
-                        presets: ["react", "es2015", "stage-2"]
-                    }
+                    loader: "babel-loader"
                 }
             }
         ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        })
+    ]
 };
 module.exports = config;﻿
