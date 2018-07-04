@@ -5,17 +5,36 @@ import { Home } from './components/Home';
 import { Header } from './components/Header';
 
 class App extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            homeLink: "Home"
+        }
+    }
+    onGreet() {
+        console.log("Hello");
+    }
+    onChangeLinkName(newName) {
+        this.setState({
+            homeLink: newName
+        })
+    }
     render() {
-         return (
+        let user = {
+            name: "Bob",
+            age: 27,
+            marks: [2,3,4,1,14]
+        }
+        return (
             <div className="container">
                 <div className="row">
                     <div className="col-xs-10 xol-xs-offset-1">
-                        <Header/>
+                        <Header homeLink={this.state.homeLink}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-xs-10 xol-xs-offset-1">
-                        <Home/>
+                        <Home name={"First App"} user={user} onGreet={this.onGreet} onChangeLink={this.onChangeLinkName.bind(this)}/>
                     </div>
                 </div>
             </div>
@@ -24,5 +43,3 @@ class App extends React.Component {
 }
 
 ReactDom.render(<App />, document.getElementById("app"));
-
-
