@@ -12,8 +12,39 @@ export class Home extends React.Component {
             this.setState({
                 status: 1
             })
-        }, 3000)
+        }, 3000);
+        console.log("constructor");
     }
+
+    componentWillMount() {
+        console.log("Conponent will mount");
+    }
+
+    componentDidMount() {
+        console.log("Component did mount");
+    }
+
+    componentWillReceiveProps() {
+        console.log("Component will recieve proprs");
+    }
+
+    shouldComponentUpdate() {
+        console.log("Should component update");
+        return true;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log("Component will update: ", nextProps, nextState);
+    }
+
+    componentDidUpdate(previousProps, previousState) {
+        console.log("Component did update: ", previousProps, previousState);
+    }
+
+    componentWillUnmount() {
+        console.log("component will unmount");
+    }
+
     onMakeOlder() {
         let user = Object.assign({}, this.state.user);
         user.age +=3;
@@ -43,7 +74,7 @@ export class Home extends React.Component {
                 </div>
                 <button onClick={this.props.onGreet}>Greet</button>
                 <hr/>
-                <input type="text" value={this.state.homeLink} onChange={(event) => {this.onChangeHandler(event)}}/>
+                <input type="text" value={this.state.homeLink} onChange={this.onChangeHandler.bind(this)}/>
                 <button onClick={this.onChangeLink.bind(this)} className="btn btn-primary">Change Link</button>
             </div>
         )
